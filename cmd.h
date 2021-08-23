@@ -81,16 +81,16 @@ int cmd_passwd(int argc, char **argv);
 #define cmd_passwd_usage "passwd"
 
 int cmd_show(int argc, char **argv);
-#define cmd_show_usage "show [--sync=auto|now|no] [--clip, -c] [--quiet, -q] [--expand-multi, -x] [--json, -j] [--all|--username|--password|--url|--notes|--field=FIELD|--id|--name|--attach=ATTACHID] [--basic-regexp, -G|--fixed-strings, -F] " color_usage " {UNIQUENAME|UNIQUEID}"
+#define cmd_show_usage "show [--sync=auto|now|no]\n\t[--clip, -c]\n\t[--quiet, -q]\n\t[--expand-multi, -x]\n\t[--json, -j]\n\t[--all|--username|--password|--url|--notes|--field=FIELD|--id|--name|--attach=ATTACHID]\n\t[--basic-regexp, -G|--fixed-strings, -F]\n\t" color_usage " {UNIQUENAME|UNIQUEID}"
 
 int cmd_ls(int argc, char **argv);
 #define cmd_ls_usage "ls [--sync=auto|now|no] [--long, -l] [-m] [-u] " color_usage " [GROUP]"
 
 int cmd_add(int argc, char **argv);
-#define cmd_add_usage "add [--sync=auto|now|no] [--non-interactive] " color_usage " {--username|--password|--url|--notes|--field=FIELD|--note-type=NOTETYPE} NAME"
+#define cmd_add_usage "add [--sync=auto|now|no]\n\t[--non-interactive]\n\t" color_usage " {--username|--password|--url|--notes|--field=FIELD|--note-type=NOTETYPE} NAME"
 
 int cmd_edit(int argc, char **argv);
-#define cmd_edit_usage "edit [--sync=auto|now|no] [--non-interactive] " color_usage " {--name|--username|--password|--url|--notes|--field=FIELD} {NAME|UNIQUEID}"
+#define cmd_edit_usage "edit [--sync=auto|now|no]\n\t[--non-interactive]\n\t" color_usage " {--name|--username|--password|--url|--notes|--field=FIELD} {NAME|UNIQUEID}"
 
 int cmd_generate(int argc, char **argv);
 #define cmd_generate_usage "generate [--sync=auto|now|no] [--clip, -c] [--username=USERNAME] [--url=URL] [--no-symbols] {NAME|UNIQUEID} LENGTH"

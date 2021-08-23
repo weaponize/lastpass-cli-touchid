@@ -52,7 +52,12 @@ include_directories(${CURL_INCLUDE_DIR})
 set(PROJECT_NAME lpass)
 
 file(GLOB PROJECT_HEADERS *.h version.h)
-file(GLOB PROJECT_SOURCES *.c)
+# only compile localauthentication.m on Apple builds
+if((APPLE))
+    file(GLOB PROJECT_SOURCES *.c *.m)
+else()
+    file(GLOB PROJECT_SOURCES *.c)
+endif()
 
 set(PROJECT_DEFINITIONS "_GNU_SOURCE")
 
@@ -76,6 +81,10 @@ target_link_libraries(${PROJECT_NAME} ${LIBXML2_LIBRARIES} ${OPENSSL_LIBRARIES} 
 if (CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(${PROJECT_NAME} "-lkvm")
 endif (CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+# Link CoreFoundation and LocalAuthentication frameworks on Apple builds
+if((APPLE))
+    target_link_libraries(${PROJECT_NAME} "-framework CoreFoundation -framework LocalAuthentication")
+endif()
 
 add_custom_command(OUTPUT lpass.1 DEPENDS ${CMAKE_SOURCE_DIR}/lpass.1.txt
         COMMAND a2x -D ./ --no-xmllint -f manpage ${CMAKE_SOURCE_DIR}/lpass.1.txt)

@@ -36,12 +36,17 @@
 #include "cmd.h"
 #include "agent.h"
 #include "blob.h"
+#include "endpoints.h"
 #include "session.h"
 #include "util.h"
 #include "process.h"
 #include <strings.h>
 #include <string.h>
 #include <regex.h>
+
+#if defined(__APPLE__) 
+#include "localauthentication.h"
+#endif
 
 enum blobsync parse_sync_string(const char *syncstr)
 {
@@ -91,6 +96,14 @@ enum note_type parse_note_type_string(const char *extra)
 
 void init_all(enum blobsync sync, unsigned char key[KDF_HASH_LEN], struct session **session, struct blob **blob)
 {
+
+#if defined(__APPLE__) 
+        int _localauthresult = localauthentication();
+        if(_localauthresult != 0) {
+                die("Failed due to macOS Touch ID.");
+        }
+#endif
+        
 	if (!agent_get_decryption_key(key))
 		die("Could not find decryption key. Perhaps you need to login with `%s login`.", ARGV[0]);
 
